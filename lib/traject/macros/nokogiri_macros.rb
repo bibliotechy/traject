@@ -18,7 +18,8 @@ module Traject
         end
 
         lambda do |record, accumulator|
-          result = record.xpath(xpath, namespaces)
+          namespaces.each {|k,v| record.root.add_namespace_definition(k,v)}
+          result = record.xpath(xpath)
 
           if to_text
             # take all matches, for each match take all
